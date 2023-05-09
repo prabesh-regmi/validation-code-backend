@@ -37,7 +37,13 @@ app.post("/api/verify", (req, res) => {
     res.status(400).json({ error: "Invalid code" });
   }
 });
-
+app.get("/", (req, res) => {
+  res
+    .status(200)
+    .send(
+      "<h1> <a href='https://codevalidation.onrender.com'>Click Me</a></h1>"
+    );
+});
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
