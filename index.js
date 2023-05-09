@@ -4,7 +4,7 @@ const cors = require("cors");
 app.use(cors());
 const port = 3030;
 app.use(express.json());
-
+var VERIFICATION_CODE;
 function generateRandomNumber() {
   let randomNumber;
   do {
@@ -15,6 +15,7 @@ function generateRandomNumber() {
 
 app.get("/api/verify", (req, res) => {
   const randomNumber = generateRandomNumber();
+  VERIFICATION_CODE = randomNumber;
   res.status(200).send({ message: randomNumber });
 });
 app.post("/api/verify", (req, res) => {
@@ -30,8 +31,8 @@ app.post("/api/verify", (req, res) => {
   if (code.toString().slice(-1) === "7") {
     return res.status(400).json({ error: "Code should not end with 7" });
   }
-  if (code == randomNumber) {
-    res.status(200).json({ message: "Verification successful" });
+  if (code == VERIFICATION_CODE) {
+    res.status(200).json({ message: "Verification successful" }); 
   } else {
     res.status(400).json({ error: "Invalid code" });
   }
