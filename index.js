@@ -12,10 +12,9 @@ function generateRandomNumber() {
   } while (randomNumber % 10 === 7);
   return randomNumber;
 }
-const randomNumber = generateRandomNumber();
-console.log(randomNumber);
 
 app.get("/api/verify", (req, res) => {
+  const randomNumber = generateRandomNumber();
   res.status(200).send({ message: randomNumber });
 });
 app.post("/api/verify", (req, res) => {
